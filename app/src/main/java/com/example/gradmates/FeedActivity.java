@@ -30,33 +30,24 @@ public class FeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feed);
 
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //swipeContainer.setRefreshing(true);
-
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
                 fetchTimelineAsync(0);
             }
         });
-        // Configure the refreshing colors
+
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright);
-        //swipeContainer.setRefreshing(false);
 
         rvPosts = findViewById(R.id.rvPosts);
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(this, allPosts);
 
-        // set the adapter on the recycler view
         rvPosts.setAdapter(adapter);
         // set the layout manager on the recycler view
         rvPosts.setLayoutManager(new LinearLayoutManager(this));
         // query posts from GradMates
         queryPosts();
-
     }
 
     private void fetchTimelineAsync(int i) {
@@ -85,7 +76,6 @@ public class FeedActivity extends AppCompatActivity {
                     return;
                 }
 
-                 //for debugging purposes let's print every post description to logcat
                 for (Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
@@ -96,6 +86,4 @@ public class FeedActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

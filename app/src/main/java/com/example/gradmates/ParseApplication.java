@@ -9,7 +9,6 @@ public class ParseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         ParseUser.registerSubclass(Post.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)

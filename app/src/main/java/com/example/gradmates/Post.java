@@ -31,11 +31,11 @@ import com.parse.ParseUser;
 
         public ParseUser getUser() {
             ParseUser user = getParseUser(KEY_USER);
-//            try {
-//                user.fetchIfNeeded();
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                user.fetchIfNeeded();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             return user;
         }
 

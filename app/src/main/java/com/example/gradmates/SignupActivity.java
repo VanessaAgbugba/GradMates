@@ -41,8 +41,6 @@ public class SignupActivity extends AppCompatActivity {
                 goFeedActivity();
             }
         });
-
-
     }
 
     private void signUpUser(String username, String password, String email) {
@@ -72,6 +70,4 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-
-
 }

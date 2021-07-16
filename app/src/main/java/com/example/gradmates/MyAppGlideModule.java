@@ -13,7 +13,6 @@ public class MyAppGlideModule extends AppGlideModule {
 
     public void applyOptions(Context context, GlideBuilder builder) {
         builder.setDefaultRequestOptions(new RequestOptions().format(DecodeFormat.PREFER_ARGB_8888));
-
     }
 
 }
