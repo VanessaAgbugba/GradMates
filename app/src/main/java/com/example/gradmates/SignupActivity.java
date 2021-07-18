@@ -13,7 +13,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-
+//Description: This class is responsible for user sign up
 public class SignupActivity extends AppCompatActivity {
     public static final String TAG = "SignUpActivity";
     EditText etNewUser;

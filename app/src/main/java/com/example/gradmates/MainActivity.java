@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.parse.ParseUser;
+
+//Description: This is the first page users see when they open the app(If they have not logged in). It holds the logo, login and sign up button.
 public class MainActivity extends AppCompatActivity {
 
     Button btnLogin;
@@ -15,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(ParseUser.getCurrentUser() != null){
+            goComposeActivity();
+        }
 
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
@@ -38,13 +45,17 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
-
     }
 
     public void onSignUp() {
         Intent i = new Intent(this, SignupActivity.class);
         startActivity(i);
         finish();
+    }
 
+    private void goComposeActivity() {
+        Intent i = new Intent(this, ComposeActivity.class);
+        startActivity(i);
+        finish();
     }
 }

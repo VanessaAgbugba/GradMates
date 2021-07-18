@@ -5,7 +5,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-
+//Description: This class is defines the setter and getter functions for the post
     @ParseClassName("Post")
     public class Post extends ParseObject {
 
@@ -42,6 +42,4 @@ import com.parse.ParseUser;
         public void setUser(ParseUser user) {
             put(KEY_USER, user);
         }
-
-
 }

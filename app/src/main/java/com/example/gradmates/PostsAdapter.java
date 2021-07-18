@@ -17,8 +17,8 @@ import com.parse.ParseFile;
 import java.util.Date;
 import java.util.List;
 
+//Description: This class is the adapter for the recycler view.
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
-
     private Context context;
     private List<Post> posts;
 
@@ -63,6 +63,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             // Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
+            //define timestamp here
 
             ParseFile image = post.getImage();
             if (image != null) {

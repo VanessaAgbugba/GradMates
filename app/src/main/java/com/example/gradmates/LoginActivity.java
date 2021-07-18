@@ -13,21 +13,17 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+//Description: This class is responsible for user login
 public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";
     private EditText etUsername;
     private EditText etPassword;
     private Button btnLogin2;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        if(ParseUser.getCurrentUser() != null){
-            goFeedActivity();
-        }
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
@@ -41,8 +37,6 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
         });
-
-
     }
 
     private void loginUser(String username, String password) {
@@ -56,16 +50,15 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e(TAG, "Issue with logging in");
                 }
                 else{
-                    goFeedActivity();
+                    goComposeActivity();
                 }
             }
         });
     }
 
-    private void goFeedActivity() {
-        Intent i = new Intent(this, FeedActivity.class);
+    private void goComposeActivity() {
+        Intent i = new Intent(this, ComposeActivity.class);
         startActivity(i);
         finish();
     }
-
 }

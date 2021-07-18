@@ -1,40 +1,55 @@
 package com.example.gradmates;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 //Description: This class is responsible for the news feed.
-public class FeedActivity extends AppCompatActivity {
-    private static final String TAG = "FeedActivity";
-    protected PostsAdapter adapter;
-    protected List<Post> allPosts;
+public class PostsFragment extends Fragment {
+    public static final String TAG = "PostsFragment";
     private RecyclerView rvPosts;
+    private PostsAdapter adapter;
+    private List<Post> allPosts;
     private SwipeRefreshLayout swipeContainer;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
+    public PostsFragment() {
+        // Required empty public constructor
+    }
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_posts, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -43,18 +58,14 @@ public class FeedActivity extends AppCompatActivity {
         });
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright);
-
-        rvPosts = findViewById(R.id.rvPosts);
+        rvPosts = view.findViewById(R.id.rvPosts);
         allPosts = new ArrayList<>();
-        adapter = new PostsAdapter(this, allPosts);
+        adapter = new PostsAdapter(getContext(), allPosts);
 
         rvPosts.setAdapter(adapter);
-        // set the layout manager on the recycler view
-        rvPosts.setLayoutManager(new LinearLayoutManager(this));
-        // query posts from GradMates
+        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         queryPosts();
     }
-
     private void fetchTimelineAsync(int i) {
         adapter.clear();
         queryPosts();
