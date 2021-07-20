@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-//Description: This class is responsible for the user's profile.
+//Fragment for ProfileActivity
 public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {

@@ -4,24 +4,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//Description: This class is responsible for the news feed.
+//This class is responsible for the news feed.
 public class FeedActivity extends AppCompatActivity {
     private static final String TAG = "FeedActivity";
     protected PostsAdapter adapter;

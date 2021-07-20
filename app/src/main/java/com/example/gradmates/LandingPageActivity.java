@@ -7,17 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.gradmates.authentication.SignupActivity;
 import com.parse.ParseUser;
-
-//Description: This is the first page users see when they open the app(If they have not logged in). It holds the logo, login and sign up button.
-public class MainActivity extends AppCompatActivity {
+//Landing Page
+//This is the first page users see when they open the app(If they have not logged in). It holds the logo, login and sign up button.
+public class LandingPageActivity extends AppCompatActivity {
 
     Button btnLogin;
     Button btnSignUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_landing_page);
 
         if(ParseUser.getCurrentUser() != null){
             goComposeActivity();

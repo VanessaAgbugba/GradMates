@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/postContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -16,7 +15,14 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         tools:text="Name" />
 
+    <TextView
+        android:id="@+id/timeStamp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        tools:text="timestamp"/>
     <ImageView
+
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -34,13 +40,20 @@
         android:id="@+id/tvLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginBottom="8dp"
         tools:text="location"/>
+
     <TextView
-        android:id="@+id/timeStamp"
+        android:id="@+id/tvAboutMe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        tools:text="timestamp"/>
+        tools:text="about me"/>
+    <TextView
+        android:id="@+id/tvBudget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        tools:text="budget"/>
 
 </LinearLayout>

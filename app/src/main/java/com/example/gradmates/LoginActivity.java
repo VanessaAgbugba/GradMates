@@ -13,7 +13,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
-//Description: This class is responsible for user login
+//This class is responsible for user login
 public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "LoginActivity";
     private EditText etUsername;
@@ -61,4 +61,5 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+
 }

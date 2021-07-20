@@ -5,13 +5,16 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-//Description: This class is defines the setter and getter functions for the post
+//This class is defines the setter and getter functions for the post
     @ParseClassName("Post")
     public class Post extends ParseObject {
 
         public static final String KEY_DESCRIPTION = "description";
         public static final String KEY_IMAGE = "image";
         public static final String KEY_USER = "user";
+        public static final String KEY_LOCATION = "location";
+        public static final String KEY_ABOUT_ME = "about_me";
+        public static final String KEY_BUDGET= "budget";
 
         public String getDescription() {
             return getString(KEY_DESCRIPTION);
@@ -21,6 +24,28 @@ import com.parse.ParseUser;
             put(KEY_DESCRIPTION, description);
         }
 
+        public String getLocation() {
+        return getString(KEY_LOCATION);
+    }
+
+        public void setLocation(String location) {
+        put(KEY_LOCATION, location);
+        }
+
+        public String getAboutMe() {
+        return getString(KEY_ABOUT_ME);
+    }
+
+        public void setAboutMe(String aboutMe) {
+        put(KEY_ABOUT_ME, aboutMe);
+        }
+        public String getBudget() {
+        return getString(KEY_BUDGET);
+    }
+
+        public void setBudget(String budget) {
+            put(KEY_BUDGET, budget);
+        }
         public ParseFile getImage() {
             return getParseFile(KEY_IMAGE);
         }

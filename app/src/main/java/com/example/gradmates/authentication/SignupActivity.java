@@ -1,4 +1,4 @@
-package com.example.gradmates;
+package com.example.gradmates.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gradmates.FeedActivity;
+import com.example.gradmates.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;

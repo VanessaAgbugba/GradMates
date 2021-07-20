@@ -1,26 +1,33 @@
 package com.example.gradmates;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
 
+import org.parceler.Parcels;
+
 import java.util.Date;
 import java.util.List;
 
-//Description: This class is the adapter for the recycler view.
+//This class is the adapter for the recycler view.
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
     private Context context;
     private List<Post> posts;
+
 
     @NonNull
     @Override
@@ -50,6 +57,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView timeStamp;
+        private TextView tvLocation;
+        private LinearLayout postContainer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,12 +66,25 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             timeStamp = itemView.findViewById(R.id.timeStamp);
+            tvLocation = itemView.findViewById(R.id.tvLocation);
+            postContainer = itemView.findViewById(R.id.postContainer);
         }
 
         public void bind(Post post) {
+            postContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, DetailsActivity.class);
+                    ParcelableObject pObject = new ParcelableObject();
+                    pObject.setPost(post);
+                    i.putExtra("post", Parcels.wrap(pObject));
+                    ((Activity) context).startActivity(i);
+                }
+            });
             // Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
+            tvLocation.setText(post.getLocation());
             //define timestamp here
 
             ParseFile image = post.getImage();
@@ -104,7 +126,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             Log.i("Error:", "getRelativeTimeAgo failed", e);
             e.printStackTrace();
         }
-
         return "";
     }
 

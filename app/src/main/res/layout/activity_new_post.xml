@@ -58,6 +58,7 @@
         android:inputType="textPersonName"
         app:layout_constraintTop_toBottomOf="@+id/ivPostImage"
         tools:layout_editor_absoluteX="0dp" />
+
     <EditText
         android:id="@+id/tvLocation"
         android:layout_width="match_parent"

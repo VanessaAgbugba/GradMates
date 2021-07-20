@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-//Description: This class defines the fragments for the app
+//This class defines the fragments for the app
 public class ComposeActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     public Fragment fragment;

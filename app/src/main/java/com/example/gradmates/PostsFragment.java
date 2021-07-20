@@ -20,7 +20,7 @@ import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
-//Description: This class is responsible for the news feed.
+//Fragment for FeedActivity
 public class PostsFragment extends Fragment {
     public static final String TAG = "PostsFragment";
     private RecyclerView rvPosts;
@@ -35,7 +35,6 @@ public class PostsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
