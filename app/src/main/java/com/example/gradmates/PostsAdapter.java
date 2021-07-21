@@ -30,8 +30,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     private Context context;
     private List<Post> posts;
     private List<Post> postsToDisplay;
-//Start Searching
-
 
     @NonNull
     @Override
@@ -146,8 +144,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-
-
     private Filter exampleFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -174,7 +170,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             results.values = filteredList;
             results.count = filteredList.size();
             return results;
-            // Mystery: The results returned here aren't passed to publishResults().
         }
 
         @Override
