@@ -7,12 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,13 +21,16 @@ import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 //This class is the adapter for the recycler view.
-public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> implements Filterable {
     private Context context;
     private List<Post> posts;
+    private List<Post> postsToDisplay;
+//Start Searching
 
 
     @NonNull
@@ -38,18 +42,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Post post = posts.get(position);
+        Post post = postsToDisplay.get(position);
         holder.bind(post);
     }
 
     public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
         this.posts = posts;
+        postsToDisplay = new ArrayList<>(posts);
     }
 
     @Override
     public int getItemCount() {
-        return posts.size();
+        return postsToDisplay.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -137,6 +142,55 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     // Add a list of items -- change to type used
     public void addAll(List<Post> list) {
         posts.addAll(list);
+        postsToDisplay.addAll(list);
         notifyDataSetChanged();
+    }
+
+
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            List<Post> filteredList = new ArrayList<>();
+            if(constraint == null || constraint.length() == 0){
+                //If the user does not enter anything, display the whole list
+                filteredList.addAll(posts);
+            }
+            else{
+                //toLowercase makes it so that the search is not case sensitive
+                //trim takes away extra whitespaces
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                //iterate to see which post matched filterPattern
+                for(Post post: posts){
+                    if(post.getLocation().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(post);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            results.count = filteredList.size();
+            return results;
+            // Mystery: The results returned here aren't passed to publishResults().
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            postsToDisplay.clear();
+            if (results.values == null) {
+                Log.e("PostsAdapter", "results.values is null");
+            } else {
+                postsToDisplay.addAll((List) results.values);
+                Log.d("PostsAdapter", "Displaying " + results.count + " results through filter");
+            }
+            notifyDataSetChanged();
+        }
+    };
+    @Override
+    public Filter getFilter(){
+        return exampleFilter;
     }
 }

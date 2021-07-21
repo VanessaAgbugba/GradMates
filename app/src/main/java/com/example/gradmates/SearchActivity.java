@@ -16,5 +16,9 @@ public class SearchActivity extends AppCompatActivity {
 
         svSearch = findViewById(R.id.svSearch);
         etSearchBar = findViewById(R.id.etSearchBar);
+
+        //Thought process
+        //Use Intent to pass the details of the post from FeedActivity to SearchActivity
+        //Search through the details by location
     }
 }

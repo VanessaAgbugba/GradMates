@@ -19,10 +19,12 @@
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/fileprovider" />
+                android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/fileprovider" />
+
+            <meta-data
+                android:name="com.google.android.geo.API_KEY" android:value="@string/google_maps_api_key"/>
         </provider>
-        <activity android:name=".MainActivity">
+        <activity android:name=".FeedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,9 +32,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewPostActivity"> </activity>
-        <activity android:name=".ComposeActivity"> </activity>
+        <activity android:name=".LandingPageActivity"> </activity>
         <activity android:name=".LoginActivity"> </activity>
-        <activity android:name=".FeedActivity"> </activity>
+        <activity android:name=".ComposeActivity"> </activity>
         <activity android:name=".DetailsActivity"> </activity>
         <activity android:name=".authentication.SignupActivity"> </activity>
 
