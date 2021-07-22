@@ -3,8 +3,12 @@
     package="com.example.gradmates">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
@@ -21,21 +25,21 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/fileprovider" />
 
-            <meta-data
-                android:name="com.google.android.geo.API_KEY" android:value="@string/google_maps_api_key"/>
         </provider>
-        <activity android:name=".ComposeActivity">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCmMy40SbmX4ZDHWGyLlhUD_OPLYepw0Jg"/>
+        <activity android:name=".Posts.ComposeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewPostActivity"> </activity>
-        <activity android:name=".LandingPageActivity"> </activity>
-        <activity android:name=".LoginActivity"> </activity>
-        <activity android:name=".FeedActivity"> </activity>
-        <activity android:name=".DetailsActivity"> </activity>
+        <activity android:name=".Posts.NewPostActivity"> </activity>
+        <activity android:name=".authentication.LandingPageActivity"> </activity>
+        <activity android:name=".authentication.LoginActivity"> </activity>
+        <activity android:name=".Posts.FeedActivity"> </activity>
+        <activity android:name=".Posts.DetailsActivity"> </activity>
         <activity android:name=".authentication.SignupActivity"> </activity>
 
     </application>

@@ -12,10 +12,6 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/actionSearch"
-        android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/actionProfile"
         android:icon="@drawable/instagram_user_outline_24"
         app:showAsAction="always" />

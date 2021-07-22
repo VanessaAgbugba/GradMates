@@ -1,4 +1,4 @@
-package com.example.gradmates;
+package com.example.gradmates.Posts;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.gradmates.ParcelableObject;
+import com.example.gradmates.Post;
+import com.example.gradmates.R;
 import com.parse.ParseFile;
 
 import org.parceler.Parcels;
@@ -88,7 +91,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
             tvLocation.setText(post.getLocation());
-            //define timestamp here
+            timeStamp.setText(calculateTimeAgo(post.getCreatedAt()));
 
             ParseFile image = post.getImage();
             if (image != null) {
@@ -123,7 +126,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             } else if (diff < 48 * HOUR_MILLIS) {
                 return "yesterday";
             } else {
-                return diff / DAY_MILLIS + " d";
+                return diff / DAY_MILLIS + " days ago";
             }
         } catch (Exception e) {
             Log.i("Error:", "getRelativeTimeAgo failed", e);

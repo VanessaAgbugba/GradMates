@@ -56,4 +56,11 @@
         android:layout_marginBottom="8dp"
         tools:text="budget"/>
 
+        <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:name="com.example.gradmates.MapFragment" />
+
 </LinearLayout>

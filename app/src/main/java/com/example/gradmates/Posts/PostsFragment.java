@@ -1,4 +1,4 @@
-package com.example.gradmates;
+package com.example.gradmates.Posts;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+
+import com.example.gradmates.Post;
+import com.example.gradmates.Posts.PostsAdapter;
+import com.example.gradmates.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

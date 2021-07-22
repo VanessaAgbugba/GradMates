@@ -1,10 +1,13 @@
-package com.example.gradmates;
+package com.example.gradmates.Posts;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.example.gradmates.Profile.ProfileFragment;
+import com.example.gradmates.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 //This class defines the fragments for the app
@@ -29,10 +32,6 @@ public class ComposeActivity extends AppCompatActivity {
                         break;
                     case R.id.actionCompose:
                         fragment = new ComposeFragment();
-
-                        break;
-                    case R.id.actionSearch:
-                        fragment = new SearchFragment();
 
                         break;
                     case R.id.actionProfile:

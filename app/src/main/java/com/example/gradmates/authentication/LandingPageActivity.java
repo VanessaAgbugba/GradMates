@@ -1,4 +1,4 @@
-package com.example.gradmates;
+package com.example.gradmates.authentication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.gradmates.authentication.SignupActivity;
+import com.example.gradmates.Posts.ComposeActivity;
+import com.example.gradmates.R;
 import com.parse.ParseUser;
 //Landing Page
 //This is the first page users see when they open the app(If they have not logged in). It holds the logo, login and sign up button.

@@ -1,4 +1,5 @@
 package com.example.gradmates;
+import com.example.gradmates.Post;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
@@ -18,5 +19,4 @@ public class ParseApplication extends Application {
                 .build()
         );
     }
-
 }

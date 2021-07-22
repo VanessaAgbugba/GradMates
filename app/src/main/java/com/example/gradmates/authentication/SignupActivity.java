@@ -9,9 +9,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gradmates.FeedActivity;
+import com.example.gradmates.Posts.FeedActivity;
 import com.example.gradmates.R;
-import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
