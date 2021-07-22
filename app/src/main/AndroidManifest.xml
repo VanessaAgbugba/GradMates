@@ -28,7 +28,7 @@
         </provider>
         <meta-data
             android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCmMy40SbmX4ZDHWGyLlhUD_OPLYepw0Jg"/>
-        <activity android:name=".Posts.ComposeActivity">
+        <activity android:name=".Profile.ProfileActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,6 +41,7 @@
         <activity android:name=".Posts.FeedActivity"> </activity>
         <activity android:name=".Posts.DetailsActivity"> </activity>
         <activity android:name=".authentication.SignupActivity"> </activity>
+        <activity android:name=".Posts.ComposeActivity"> </activity>
 
     </application>
 
