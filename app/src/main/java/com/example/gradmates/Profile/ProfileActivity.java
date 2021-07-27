@@ -9,15 +9,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gradmates.ParcelableObject;
-import com.example.gradmates.Post;
+import com.bumptech.glide.Glide;
 import com.example.gradmates.R;
 import com.example.gradmates.authentication.LoginActivity;
 import com.parse.ParseUser;
 
-import org.parceler.Parcels;
-
 public class ProfileActivity extends AppCompatActivity {
+    private static final String TAG = "ProfileActivity";
     private ImageView ivProfilePic;
     private TextView tvUserName;
     private TextView tvAge;
@@ -53,11 +51,28 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        if(ParseUser.getCurrentUser() != null)
+        {
+            tvUserName.setText("Username: " + ParseUser.getCurrentUser().getUsername());
+            tvEmail.setText("Email: " + ParseUser.getCurrentUser().getEmail());
+            tvAge.setText("Age: " + ParseUser.getCurrentUser().get("Age"));
+            tvGender.setText("Gender: " + ParseUser.getCurrentUser().get("Gender"));
+            tvPronouns.setText("Pronouns: " + ParseUser.getCurrentUser().get("Pronouns"));
 
+            ParseUser user = ParseUser.getCurrentUser();
+            Glide.with(this)
+                    .load(user.getParseFile("profileImage").getUrl())
+                    .circleCrop() // create an effect of a round profile picture
+                    .into(ivProfilePic);
+        }
     }
+
     public void goToLoginActivity() {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
     }
+
+
+
 }

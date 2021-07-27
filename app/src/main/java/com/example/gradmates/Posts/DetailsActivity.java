@@ -1,30 +1,41 @@
 package com.example.gradmates.Posts;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
+import com.codepath.asynchttpclient.RequestParams;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.gradmates.MapFragment;
 import com.example.gradmates.ParcelableObject;
 import com.example.gradmates.Post;
 import com.example.gradmates.R;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.codepath.asynchttpclient.AsyncHttpClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import java.util.Date;
 
+import okhttp3.Headers;
+
 //This is the activity that expands the details of a post
 public class DetailsActivity extends AppCompatActivity {
 
+    public static final String TAG = "DetailsActivity";
     private TextView tvUsername;
     private ImageView ivImage;
     private TextView tvDescription;
@@ -33,17 +44,14 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView tvBudget;
     private TextView timestamp;
     public Fragment fragment;
+    JSONObject jsonObject;
+    JSONArray jsonArrayResults;
+    public Double longitude, latitude;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
-        //Initialize fragment
-        Fragment fragment = new MapFragment();
-
-        //Open fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
 
         tvUsername = findViewById(R.id.tvUsername);
         ivImage = findViewById(R.id.ivImage);
@@ -55,7 +63,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         ParcelableObject objectReceived = Parcels.unwrap(getIntent().getParcelableExtra("post"));
         Post postReceived = objectReceived.getPost();
-        Log.d("DetailsActivity", "Post received = " + postReceived.getDescription());
+        Log.d("DetailsActivity", "User received = " + postReceived.getDescription());
 
         ParseUser postUser = postReceived.getUser();
 
@@ -71,6 +79,52 @@ public class DetailsActivity extends AppCompatActivity {
         if (tvLocation != null) {
             tvLocation.setText(postReceived.getLocation());
         }
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+
+        //Using geocode to get the longitude and latitude of the location
+        client.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + postReceived.getLocation() + "&key=AIzaSyCmMy40SbmX4ZDHWGyLlhUD_OPLYepw0Jg", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                // Access a JSON object response with `json.jsonObject`
+                Log.d("DEBUG OBJECT", json.jsonObject.toString());
+                jsonObject = json.jsonObject;
+                //result-> geometry-> location-> long/lat
+                try {
+                    jsonArrayResults = (JSONArray) jsonObject.get("results");
+                    Log.i("Results", String.valueOf(jsonArrayResults));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    JSONObject geometry = (JSONObject) jsonArrayResults.getJSONObject(0).get("geometry");
+                    JSONObject location = (JSONObject) geometry.get("location");
+                    latitude = (Double) location.get("lat");
+                    longitude = (Double) location.get("lng");
+                    Log.i("geometry", String.valueOf(geometry));
+                    Log.i("location", String.valueOf(location));
+                    Log.i("latitude", String.valueOf(latitude));
+                    Log.i("longitude", String.valueOf(longitude));
+
+                    //Initialize fragment
+                    Fragment fragment = new MapFragment(latitude, longitude);
+
+                    //Open fragment
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Toast.makeText(DetailsActivity.this, "Failure retrieving location", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Log.i("DetailsActivity", "sent geocode request");
 
         if (tvAboutMe != null) {
             tvAboutMe.setText(postReceived.getAboutMe());
@@ -124,3 +178,4 @@ public class DetailsActivity extends AppCompatActivity {
         return "";
     }
 }
+

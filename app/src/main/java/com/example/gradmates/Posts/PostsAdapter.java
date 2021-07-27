@@ -65,6 +65,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView timeStamp;
         private TextView tvLocation;
         private LinearLayout postContainer;
+        private TextView tvAge;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +75,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             timeStamp = itemView.findViewById(R.id.timeStamp);
             tvLocation = itemView.findViewById(R.id.tvLocation);
             postContainer = itemView.findViewById(R.id.postContainer);
+            tvAge = itemView.findViewById(R.id.tvAge);
         }
 
         public void bind(Post post) {
@@ -87,17 +89,18 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     ((Activity) context).startActivity(i);
                 }
             });
+
             // Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
             tvLocation.setText(post.getLocation());
             timeStamp.setText(calculateTimeAgo(post.getCreatedAt()));
-
             ParseFile image = post.getImage();
             if (image != null) {
                 Glide.with(context).load(image.getUrl()).into(ivImage);
             }
         }
+
     }
 
     public static String calculateTimeAgo(Date createdAt) {
@@ -191,4 +194,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     public Filter getFilter(){
         return exampleFilter;
     }
-}
+
+    }
+

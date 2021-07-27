@@ -39,6 +39,7 @@ import com.parse.ParseUser;
         public void setAboutMe(String aboutMe) {
         put(KEY_ABOUT_ME, aboutMe);
         }
+
         public String getBudget() {
         return getString(KEY_BUDGET);
     }
@@ -46,6 +47,7 @@ import com.parse.ParseUser;
         public void setBudget(String budget) {
             put(KEY_BUDGET, budget);
         }
+
         public ParseFile getImage() {
             return getParseFile(KEY_IMAGE);
         }

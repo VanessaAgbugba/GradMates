@@ -40,7 +40,10 @@ public class ComposeActivity extends AppCompatActivity {
 
                         break;
                 }
-                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.flContainer, fragment)
+                        .addToBackStack(null)
+                        .commit();
                 return true;
             }
         });

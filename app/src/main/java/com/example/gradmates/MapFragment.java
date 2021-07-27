@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.gradmates.Posts.DetailsActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -37,6 +38,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,21 +55,22 @@ public class MapFragment extends Fragment {
     private GoogleMap map;
     private LocationRequest mLocationRequest;
     Location mCurrentLocation;
+    Location postUserLocation;
     private long UPDATE_INTERVAL = 60000;  /* 60 secs */
     private long FASTEST_INTERVAL = 5000; /* 5 secs */
-
+    private double lat, lng;
     private final static String KEY_LOCATION = "location";
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 
 
-    public MapFragment() {
-        // Required empty public constructor
+    public MapFragment(double lat, double lng) {
+            this.lat = lat;
+            this.lng = lng;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -78,38 +81,14 @@ public class MapFragment extends Fragment {
         //Details activity layout here
         //START
         final View view = inflater.inflate(R.layout.fragment_map, container, false);
-        SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
 
-        //async map
-        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-
-                //When map is loaded
-                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(LatLng latLng) {
-                        //When map is clicked
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        markerOptions.position(latLng);
-                        markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-                        googleMap.clear();
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                latLng, 10
-                        ));
-                        //Add marker on map
-                        googleMap.addMarker(markerOptions);
-
-                    }
-                });
-            }
-        });
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         if (TextUtils.isEmpty(getResources().getString(R.string.google_maps_api_key))) {
             throw new IllegalStateException("You forgot to supply a Google Maps API key");
         }
@@ -120,7 +99,7 @@ public class MapFragment extends Fragment {
             mCurrentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
         }
 
-        mapFragment = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map));
+        mapFragment = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
         if (mapFragment != null) {
             mapFragment.getMapAsync(new OnMapReadyCallback() {
                 @Override
@@ -131,7 +110,6 @@ public class MapFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void loadMap(GoogleMap googleMap) {
@@ -142,7 +120,7 @@ public class MapFragment extends Fragment {
             Toast.makeText(getContext(), "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
             MapFragmentPermissionsDispatcher.getMyLocationWithPermissionCheck(this);
             MapFragmentPermissionsDispatcher.startLocationUpdatesWithPermissionCheck(this);
-        } else {
+         } else {
             Toast.makeText(getContext(), "Error - Map was null!!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -177,17 +155,11 @@ public class MapFragment extends Fragment {
                 });
     }
 
-    /*
-     * Called when the Activity becomes visible.
-     */
     @Override
     public void onStart() {
         super.onStart();
     }
 
-    /*
-     * Called when the Activity is no longer visible.
-     */
     @Override
     public void onStop() {
         super.onStop();
@@ -213,7 +185,6 @@ public class MapFragment extends Fragment {
                 errorFragment.setDialog(errorDialog);
                 errorFragment.show(getActivity().getSupportFragmentManager(), "Location Updates");
             }
-
             return false;
         }
     }
@@ -222,24 +193,23 @@ public class MapFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        displayLocation();
+        displayUniqueLocation();
 
         MapFragmentPermissionsDispatcher.startLocationUpdatesWithPermissionCheck(this);
     }
 
-    private void displayLocation() {
-    //Null check
-        if(map != null) {
-            if (mCurrentLocation != null) {
-                Toast.makeText(getContext(), "GPS location was found!", Toast.LENGTH_SHORT).show();
-                LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
-                map.animateCamera(cameraUpdate);
-            } else {
-                Toast.makeText(getContext(), "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
-            }
-        }
 
+    private  void displayUniqueLocation() {
+
+        if(map != null) {
+
+            LatLng location = new LatLng(lat, lng);
+            map.addMarker(new MarkerOptions().position(location).title("Location"));
+            map.moveCamera(CameraUpdateFactory.newLatLng(location));
+            map.animateCamera(CameraUpdateFactory.zoomBy(10.0f));
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 17);
+
+        }
     }
 
     @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
@@ -273,11 +243,7 @@ public class MapFragment extends Fragment {
         }
 
         mCurrentLocation = location;
-        String msg = "Updated Location: " +
-                Double.toString(location.getLatitude()) + "," +
-                Double.toString(location.getLongitude());
-        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-        displayLocation();
+        displayUniqueLocation();
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -308,5 +274,4 @@ public class MapFragment extends Fragment {
             return mDialog;
         }
     }
-
 }
