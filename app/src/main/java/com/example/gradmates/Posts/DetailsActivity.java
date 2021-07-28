@@ -80,10 +80,10 @@ public class DetailsActivity extends AppCompatActivity {
             tvLocation.setText(postReceived.getLocation());
         }
         AsyncHttpClient client = new AsyncHttpClient();
-        RequestParams params = new RequestParams();
 
         //Using geocode to get the longitude and latitude of the location
-        client.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + postReceived.getLocation() + "&key=AIzaSyCmMy40SbmX4ZDHWGyLlhUD_OPLYepw0Jg", params, new JsonHttpResponseHandler() {
+        //Used asyncHttpClient to send a geocode JSON request to retrieve the location
+        client.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + postReceived.getLocation() + "&key=AIzaSyCmMy40SbmX4ZDHWGyLlhUD_OPLYepw0Jg", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 // Access a JSON object response with `json.jsonObject`

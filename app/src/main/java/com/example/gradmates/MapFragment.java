@@ -202,7 +202,6 @@ public class MapFragment extends Fragment {
     private  void displayUniqueLocation() {
 
         if(map != null) {
-
             LatLng location = new LatLng(lat, lng);
             map.addMarker(new MarkerOptions().position(location).title("Location"));
             map.moveCamera(CameraUpdateFactory.newLatLng(location));
