@@ -193,17 +193,17 @@ public class PostsFragment extends Fragment {
                 adapter.sortByBudgetDescending();
 
                 return true;
-            case R.id.early_date:
-                try {
-                    adapter.sortByDateEarliest();
-                } catch (java.text.ParseException e) {
-                    e.printStackTrace();
-                }
+//            case R.id.early_date:
+//                try {
+//                    adapter.sortByDateEarliest();
+//                } catch (java.text.ParseException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                return true;
+//            case R.id.late_date:
 
-                return true;
-            case R.id.late_date:
-
-                return true;
+                //return true;
         }
         return super.onOptionsItemSelected(item);
     }

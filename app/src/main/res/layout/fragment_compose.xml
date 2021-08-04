@@ -23,14 +23,15 @@
         android:id="@+id/btnTakePhoto"
         android:layout_width="175dp"
         android:layout_height="38dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/login_buttons"
         android:fontFamily="@font/open_sans_bold"
         android:text="Take Photo"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/ivPostImage"
-        tools:layout_editor_absoluteX="7dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPostImage" />
 
     <ImageView
         android:id="@+id/ivPostImage"
@@ -45,8 +46,8 @@
         android:id="@+id/btnSubmit"
         android:layout_width="100dp"
         android:layout_height="38dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/login_buttons"
         android:fontFamily="@font/open_sans_bold"
         android:text="Post"
@@ -58,8 +59,8 @@
     <EditText
         android:id="@+id/tvCaption"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="76dp"
         android:ems="10"
         android:fontFamily="@font/open_sans"
         android:hint="Add caption"
@@ -71,7 +72,7 @@
     <EditText
         android:id="@+id/tvLocation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="9dp"
         android:ems="10"
         android:fontFamily="@font/open_sans"
@@ -84,7 +85,7 @@
     <EditText
         android:id="@+id/etAboutMe"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="52dp"
         android:ems="10"
         android:fontFamily="@font/open_sans"
@@ -97,7 +98,7 @@
     <EditText
         android:id="@+id/etBudget"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="9dp"
         android:ems="10"
         android:fontFamily="@font/open_sans"
@@ -106,5 +107,41 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etAboutMe" />
+
+    <Button
+        android:id="@+id/minStay"
+        android:layout_width="62dp"
+        android:layout_height="34dp"
+        android:text="Min"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etBudget" />
+
+    <TextView
+        android:id="@+id/tvMinStay"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:hint="Approximate Move Out Date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etBudget"
+        tools:text="Minimum Stay" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMinStay"
+        tools:text="Maximum Stay" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="61dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="2dp"
+        android:text="Max"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/minStay" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

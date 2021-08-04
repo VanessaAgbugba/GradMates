@@ -1,5 +1,6 @@
 package com.example.gradmates.Posts;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -20,11 +22,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gradmates.DatePickerFragment;
 import com.example.gradmates.Post;
 import com.example.gradmates.R;
 import com.parse.ParseException;
@@ -34,9 +38,11 @@ import com.parse.SaveCallback;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 //Fragment for NewPostActivity
-public class ComposeFragment extends Fragment {
+public class ComposeFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
     public static final String TAG = "NewPostActivity";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     public static final int PICK_PHOTO_CODE = 1042;
@@ -50,6 +56,8 @@ public class ComposeFragment extends Fragment {
     private EditText etBudget;
     private File photoFile;
     public String photoFileName = "photo.jpg";
+    private Button minStay;
+    private TextView tvMinStay;
 
     public ComposeFragment() {
         // Required empty public constructor
@@ -78,6 +86,8 @@ public class ComposeFragment extends Fragment {
         tvLocation = view.findViewById(R.id.tvLocation);
         etAboutMe = view.findViewById(R.id.etAboutMe);
         etBudget = view.findViewById(R.id.etBudget);
+        minStay = view.findViewById(R.id.minStay);
+        tvMinStay = view.findViewById(R.id.tvMinStay);
 
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +132,15 @@ public class ComposeFragment extends Fragment {
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description,aboutMe, budget, location, currentUser, photoFile);
+            }
+        });
+
+        minStay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.setTargetFragment(ComposeFragment.this, 0);
+                datePicker.show(getActivity().getSupportFragmentManager(), "date picker");
             }
         });
     }
@@ -221,5 +240,16 @@ public class ComposeFragment extends Fragment {
             Log.e(TAG, "Error loading image", e);
         }
         return image;
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        String currentDateString = DateFormat.getDateInstance().format(calendar.getTime());
+        tvMinStay.setText(currentDateString);
     }
 }
