@@ -19,6 +19,7 @@ public class ComposeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
+        //getSupportActionBar().setElevation(0);
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -50,4 +51,5 @@ public class ComposeActivity extends AppCompatActivity {
         //Default page
         bottomNavigationView.setSelectedItemId(R.id.actionHome);
     }
+
 }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.gradmates.R;
+import com.example.gradmates.authentication.LandingPageActivity;
 import com.example.gradmates.authentication.LoginActivity;
 import com.parse.ParseUser;
 
@@ -66,17 +67,17 @@ public class ProfileFragment extends Fragment {
 
                 if(currentUser != null) {
                     ParseUser.logOut();
-                    goToLoginActivity();
+                    goToLandingPageActivity();
                 }
             }
         });
         if(ParseUser.getCurrentUser() != null)
         {
-            tvUserName.setText("Username: " + ParseUser.getCurrentUser().getUsername());
-            tvEmail.setText("Email: " + ParseUser.getCurrentUser().getEmail());
-            tvAge.setText("Age: " + ParseUser.getCurrentUser().get("Age"));
-            tvGender.setText("Gender: " + ParseUser.getCurrentUser().get("Gender"));
-            tvPronouns.setText("Pronouns: " + ParseUser.getCurrentUser().get("Pronouns"));
+            tvUserName.setText(ParseUser.getCurrentUser().getUsername());
+            tvEmail.setText(ParseUser.getCurrentUser().getEmail());
+            tvAge.setText((String) ParseUser.getCurrentUser().get("Age"));
+            tvGender.setText((String) ParseUser.getCurrentUser().get("Gender"));
+            tvPronouns.setText((String) ParseUser.getCurrentUser().get("Pronouns"));
 
             ParseUser user = ParseUser.getCurrentUser();
             Glide.with(this)
@@ -86,8 +87,8 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    public void goToLoginActivity() {
-        Intent i = new Intent(getActivity(), LoginActivity.class);
+    public void goToLandingPageActivity() {
+        Intent i = new Intent(getActivity(), LandingPageActivity.class);
         startActivity(i);
         getActivity().finish();
     }

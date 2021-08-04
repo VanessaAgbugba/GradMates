@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.gradmates.Posts.ComposeActivity;
 import com.example.gradmates.R;
@@ -16,6 +19,7 @@ public class LandingPageActivity extends AppCompatActivity {
 
     Button btnLogin;
     Button btnSignUp;
+    ImageView icon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,9 @@ public class LandingPageActivity extends AppCompatActivity {
             goComposeActivity();
         }
 
+        icon = findViewById(R.id.icon);
+        Animation animation = AnimationUtils.loadAnimation(this,R.anim.anim);
+        icon.startAnimation(animation);
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
 

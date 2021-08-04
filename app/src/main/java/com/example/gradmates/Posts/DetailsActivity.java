@@ -43,6 +43,8 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView tvAboutMe;
     private TextView tvBudget;
     private TextView timestamp;
+    private ImageView profilePic;
+    private TextView tvDate;
     public Fragment fragment;
     JSONObject jsonObject;
     JSONArray jsonArrayResults;
@@ -60,6 +62,8 @@ public class DetailsActivity extends AppCompatActivity {
         tvAboutMe = findViewById(R.id.tvAboutMe);
         tvBudget = findViewById(R.id.tvBudget);
         timestamp = findViewById(R.id.timeStamp);
+        profilePic = findViewById(R.id.profilePic);
+        tvDate = findViewById(R.id.tvDate);
 
         ParcelableObject objectReceived = Parcels.unwrap(getIntent().getParcelableExtra("post"));
         Post postReceived = objectReceived.getPost();
@@ -68,9 +72,9 @@ public class DetailsActivity extends AppCompatActivity {
         ParseUser postUser = postReceived.getUser();
 
         ParseFile image = postReceived.getImage();
-        if (image != null) {
-            Glide.with(this).load(image.getUrl()).into(ivImage);
-        }
+//        if (image != null) {
+//            Glide.with(this).load(image.getUrl()).into(ivImage);
+//        }
 
         if (tvDescription != null) {
             tvDescription.setText(postReceived.getDescription());
@@ -140,6 +144,13 @@ public class DetailsActivity extends AppCompatActivity {
         }
         if(timestamp != null) {
             timestamp.setText(calculateTimeAgo(postReceived.getCreatedAt()));
+        }
+        if(tvDate != null) {
+            tvDate.setText((String) postReceived.get("available_date"));
+        }
+        ParseFile profileImg = (ParseFile) postUser.get("profileImage");
+        if(profilePic != null) {
+            Glide.with(this).load(profileImg.getUrl()).circleCrop().into(profilePic);
         }
 
     }

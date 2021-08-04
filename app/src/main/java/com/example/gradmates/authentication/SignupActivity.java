@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gradmates.Posts.FeedActivity;
+import com.example.gradmates.Posts.PostsFragment;
 import com.example.gradmates.R;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -39,7 +39,7 @@ public class SignupActivity extends AppCompatActivity {
                 String email = etEmail.getText().toString();
 
                 signUpUser(username, password, email);
-                goFeedActivity();
+               goToLoginActivity();
             }
         });
     }
@@ -57,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 //If no one has signed in
                 if(e == null) {
-                    goFeedActivity();
+                    goToLoginActivity();
                 }
                 else{
                     Log.e(TAG, "Error signing up");
@@ -66,8 +66,9 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    private void goFeedActivity() {
-        Intent i = new Intent(this, FeedActivity.class);
+
+    public  void goToLoginActivity() {
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
     }

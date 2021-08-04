@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">GradMates</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="google_maps_api_key">AIzaSyCmMy40SbmX4ZDHWGyLlhUD_OPLYepw0Jg</string>
+    <string name="Login">Log in</string>
+    <string name="Signup">Sign up</string>
+
 </resources>

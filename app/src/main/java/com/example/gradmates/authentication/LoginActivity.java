@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                 //error check
                 if(e != null) {
                     Log.e(TAG, "Issue with logging in");
+                    Toast.makeText(LoginActivity.this, "Username or Password is incorrect", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     goComposeActivity();

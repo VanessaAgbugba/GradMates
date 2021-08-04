@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,7 +24,11 @@ import com.parse.ParseFile;
 
 import org.parceler.Parcels;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +37,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     private Context context;
     private List<Post> posts;
     private List<Post> postsToDisplay;
+    private Post post = new Post();
 
     @NonNull
     @Override
@@ -64,8 +69,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private ImageView ivImage;
         private TextView timeStamp;
         private TextView tvLocation;
-        private LinearLayout postContainer;
+        private ConstraintLayout postContainer;
         private TextView tvAge;
+        private ImageView profilePic;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +82,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             tvLocation = itemView.findViewById(R.id.tvLocation);
             postContainer = itemView.findViewById(R.id.postContainer);
             tvAge = itemView.findViewById(R.id.tvAge);
+            profilePic = itemView.findViewById(R.id.ivProfileImage);
         }
 
         public void bind(Post post) {
@@ -99,9 +106,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             if (image != null) {
                 Glide.with(context).load(image.getUrl()).into(ivImage);
             }
-        }
+            ParseFile profileImg = (ParseFile) post.getUser().get("profileImage");
+            if(profileImg != null) {
+                Glide.with(context).load(profileImg.getUrl()).circleCrop().into(profilePic);
+            }
 
-    }
+        }
+        }
 
     public static String calculateTimeAgo(Date createdAt) {
 
@@ -138,10 +149,64 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         return "";
     }
 
+
     public void clear() {
+        int size = posts.size();
+        postsToDisplay.clear();
         posts.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+    public void sortByBudgetAscending(){
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
+            @Override
+            public int compare(Post o1, Post o2) {
+                return o1.getBudget().compareTo(o2.getBudget());
+            }
+        });
         notifyDataSetChanged();
     }
+    public void sortByBudgetDescending(){
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
+            @Override
+            public int compare(Post o1, Post o2) {
+                return o2.getBudget().compareTo(o1.getBudget());
+            }
+        });
+        notifyDataSetChanged();
+    }
+    public void sortByDateEarliest() throws ParseException {
+
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
+            //Converting date into SimpleDateFormat
+            String myDate = post.getAvailableDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy");
+            Date date = sdf.parse(myDate);
+            @Override
+            public int compare(Post o1, Post o2) {
+
+                return date.compareTo(date);
+            }
+
+            });
+        notifyDataSetChanged();
+    }
+    public void sortByDateLatest(){
+
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
+            @Override
+            public int compare(Post o1, Post o2) {
+                try {
+                    return o2.getDateObject().compareTo(o1.getDateObject());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+
+        });
+        notifyDataSetChanged();
+    }
+    //parse string into date object
 
     // Add a list of items -- change to type used
     public void addAll(List<Post> list) {

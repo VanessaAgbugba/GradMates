@@ -23,10 +23,12 @@
         android:name=".ParseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="GradMates"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GradMates">
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+        android:usesCleartextTraffic="true">
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.codepath.fileprovider.gradmates"
@@ -38,6 +40,10 @@
         </provider>
         <meta-data
             android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCmMy40SbmX4ZDHWGyLlhUD_OPLYepw0Jg"/>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
         <activity android:name=".authentication.LandingPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,13 +51,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Posts.NewPostActivity"> </activity>
-        <activity android:name=".Posts.ComposeActivity"> </activity>
+        <activity android:name=".Posts.ComposeActivity" android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
         <activity android:name=".authentication.LoginActivity"> </activity>
-        <activity android:name=".Posts.FeedActivity"> </activity>
         <activity android:name=".Posts.DetailsActivity"> </activity>
         <activity android:name=".authentication.SignupActivity"> </activity>
-        <activity android:name=".Profile.ProfileActivity"> </activity>
 
     </application>
 

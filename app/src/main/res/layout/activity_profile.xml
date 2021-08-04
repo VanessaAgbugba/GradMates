@@ -1,84 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    android:layout_marginTop="8dp"
-    android:orientation="vertical"
-    android:id="@+id/profile_view">
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="403dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/myPurple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/ivProfilePic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="8dp"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="16dp"
+        android:layout_width="150dp"
+        android:layout_height="126dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="USERNAME:"
+        android:textColor="@color/myPurple"
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="158dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/tvEmail"
+        app:layout_constraintStart_toEndOf="@+id/name"
         tools:text="Username" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="EMAIL:"
+        android:textColor="@color/myPurple"
+        app:layout_constraintBottom_toTopOf="@+id/age"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="320dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/tvAge"
+        app:layout_constraintStart_toEndOf="@+id/email"
         tools:text="Email" />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="AGE:"
+        android:textColor="@color/myPurple"
+        app:layout_constraintBottom_toTopOf="@+id/gender"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/open_sans"
         android:text="age"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="193dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/tvGender"
+        app:layout_constraintStart_toEndOf="@+id/age"
         tools:text="Age" />
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="GENDER:"
+        android:textColor="@color/myPurple"
+        app:layout_constraintBottom_toTopOf="@+id/pronouns"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="236dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/tvPronouns"
+        app:layout_constraintStart_toEndOf="@+id/gender"
         tools:text="Gender" />
+
+    <TextView
+        android:id="@+id/pronouns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="252dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="PRONOUNS:"
+        android:textColor="@color/myPurple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvPronouns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="279dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="252dp"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pronouns"
         tools:text="Pronouns" />
-
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Location"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="356dp"
-        android:layout_marginTop="8dp"/>
 
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
+        android:textColor="@color/white"
         app:backgroundTint="#000000"
-        tools:layout_editor_absoluteX="301dp"
-        tools:layout_editor_absoluteY="623dp"
-        android:layout_marginTop="200dp"/>
-</LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

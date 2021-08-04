@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.gradmates.Post;
 import com.example.gradmates.Posts.PostsAdapter;
@@ -22,6 +23,8 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 //Fragment for FeedActivity
 public class PostsFragment extends Fragment {
@@ -39,6 +42,7 @@ public class PostsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -103,6 +107,106 @@ public class PostsFragment extends Fragment {
             }
         });
     }
+    private void queryPostsNewest() {
+        // specify what type of data we want to query - Post.class
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        // include data referred by user key
+        query.include(Post.KEY_USER);
+        // limit query to latest 20 items
+        query.setLimit(20);
+        // order posts by creation date (newest first)
+        query.addDescendingOrder("createdAt");
+        // start an asynchronous call for posts
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                // check for errors
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+
+                for (Post post : posts) {
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                }
+
+                // save received posts to list and notify adapter of new data
+                adapter.addAll(posts);
+            }
+        });
+    }
+
+    private void queryPostsOldest() {
+        // specify what type of data we want to query - Post.class
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        // include data referred by user key
+        query.include(Post.KEY_USER);
+        // limit query to latest 20 items
+        query.setLimit(20);
+        // order posts by creation date (newest first)
+        query.addAscendingOrder("createdAt");
+        // start an asynchronous call for posts
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                // check for errors
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
+
+                for (Post post : posts) {
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                }
+
+                // save received posts to list and notify adapter of new data
+                adapter.addAll(posts);
+            }
+        });
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.newest:
+                //Collections.sort(allPosts, Post.PostNewestComparator);
+                adapter.clear();
+                queryPostsNewest();
+                adapter.notifyDataSetChanged();
+
+                return true;
+
+            case R.id.oldest:
+                //Collections.sort(allPosts, Post.PostOldestComparator);
+                adapter.clear();
+                queryPostsOldest();
+                adapter.notifyDataSetChanged();
+
+                return true;
+
+            case R.id.budget_asc:
+                adapter.sortByBudgetAscending();
+
+                return true;
+            case R.id.budget_dsc:
+                adapter.sortByBudgetDescending();
+
+                return true;
+            case R.id.early_date:
+                try {
+                    adapter.sortByDateEarliest();
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+
+                return true;
+            case R.id.late_date:
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
@@ -125,4 +229,5 @@ public class PostsFragment extends Fragment {
             }
         });
     }
+
 }
