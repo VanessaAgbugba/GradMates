@@ -170,7 +170,6 @@ public class PostsFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.newest:
-                //Collections.sort(allPosts, Post.PostNewestComparator);
                 adapter.clear();
                 queryPostsNewest();
                 adapter.notifyDataSetChanged();
@@ -178,7 +177,6 @@ public class PostsFragment extends Fragment {
                 return true;
 
             case R.id.oldest:
-                //Collections.sort(allPosts, Post.PostOldestComparator);
                 adapter.clear();
                 queryPostsOldest();
                 adapter.notifyDataSetChanged();
@@ -193,17 +191,18 @@ public class PostsFragment extends Fragment {
                 adapter.sortByBudgetDescending();
 
                 return true;
-//            case R.id.early_date:
-//                try {
-//                    adapter.sortByDateEarliest();
-//                } catch (java.text.ParseException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                return true;
-//            case R.id.late_date:
+            case R.id.early_date:
+                try {
+                    adapter.sortByDateEarliest();
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
 
-                //return true;
+                return true;
+            case R.id.late_date:
+                adapter.sortByDateLatest();
+
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

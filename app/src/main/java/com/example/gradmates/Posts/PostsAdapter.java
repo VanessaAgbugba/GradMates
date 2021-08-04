@@ -174,38 +174,38 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         });
         notifyDataSetChanged();
     }
-//    public void sortByDateEarliest() throws ParseException {
-//
-//        Collections.sort(postsToDisplay, new Comparator<Post>() {
-//            //Converting date into SimpleDateFormat
-//            String myDate = post.getAvailableDate();
-//            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yy");
-//            Date date = sdf.parse(myDate);
-//            @Override
-//            public int compare(Post o1, Post o2) {
-//
-//                return date.compareTo(date);
-//            }
-//
-//            });
-//        notifyDataSetChanged();
-//    }
-//    public void sortByDateLatest(){
-//
-//        Collections.sort(postsToDisplay, new Comparator<Post>() {
-//            @Override
-//            public int compare(Post o1, Post o2) {
-//                try {
-//                    return o2.getDateObject().compareTo(o1.getDateObject());
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                return 0;
-//            }
-//
-//        });
-//        notifyDataSetChanged();
-//    }
+    public void sortByDateEarliest() throws ParseException {
+
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
+            @Override
+            public int compare(Post o1, Post o2) {
+                try {
+                    return o1.getDateObject().compareTo(o2.getDateObject());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return -1;
+            }
+
+        });
+        notifyDataSetChanged();
+    }
+    public void sortByDateLatest(){
+
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
+            @Override
+            public int compare(Post o1, Post o2) {
+                try {
+                    return o2.getDateObject().compareTo(o1.getDateObject());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return -1;
+            }
+
+        });
+        notifyDataSetChanged();
+    }
     //parse string into date object
 
     // Add a list of items -- change to type used

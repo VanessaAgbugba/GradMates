@@ -18,7 +18,7 @@ public class DatePickerFragment extends DialogFragment {
     @NotNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(); //getInstance method gets the calendar using the current timezone of the user's region
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);

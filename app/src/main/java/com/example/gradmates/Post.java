@@ -59,36 +59,18 @@ import java.util.Locale;
         public String getAvailableDate() {
             return getString(KEY_AVAILABLE_DATE);
         }
-//        public Date getDateObject() throws java.text.ParseException {
-//            Post post = new Post();
-//
-//            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-//
-//            String dateInString = post.getAvailableDate();
-//            Date date = formatter.parse(dateInString);
-//
-//        return date;
-//
-//        }
-
         public void setAvailableDate(String availableDate) {
         put(KEY_AVAILABLE_DATE, availableDate);
-    }
-//        public static Comparator<Post> PostNewestComparator = new Comparator<Post>() {
-//            @Override
-//            public int compare(Post o1, Post o2) {
-//                return o1.getAvailableDate().compareToIgnoreCase(o2.getAvailableDate());
-//                //return o1.getCreatedAt().compareTo(o2.getCreatedAt());
-//                //return o1.getBudget().compareTo(o2.getBudget());
-//            }
-//        };
-//        public static Comparator<Post> PostOldestComparator = new Comparator<Post>() {
-//            @Override
-//            public int compare(Post o1, Post o2) {
-//                return o2.getAvailableDate().compareToIgnoreCase(o1.getAvailableDate());
-//                //return o2.getCreatedAt().compareTo(o1.getCreatedAt());
-//            }
-//        };
+        }
+        public Date getDateObject() throws java.text.ParseException {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String dateInString = getAvailableDate();
+            Date date = sdf.parse(dateInString);
+
+        return date;
+
+        }
 
         public ParseFile getImage() {
             return getParseFile(KEY_IMAGE);
