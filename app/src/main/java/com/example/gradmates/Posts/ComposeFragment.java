@@ -54,6 +54,7 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
     private EditText tvLocation;
     private EditText etAboutMe;
     private EditText etBudget;
+    private EditText availableDate;
     private File photoFile;
     public String photoFileName = "photo.jpg";
     private ImageButton minStay;
@@ -82,6 +83,7 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
         tvCaption = view.findViewById(R.id.tvCaption);
         tvLocation = view.findViewById(R.id.tvLocation);
         etAboutMe = view.findViewById(R.id.etAboutMe);
+        availableDate = view.findViewById(R.id.availableDate);
         etBudget = view.findViewById(R.id.etBudget);
         minStay = view.findViewById(R.id.minStay);
         tvMinStay = view.findViewById(R.id.tvMinStay);
@@ -107,28 +109,32 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
                 String location = tvLocation.getText().toString();
                 String aboutMe = etAboutMe.getText().toString();
                 String budget = etBudget.getText().toString();
+                String date = availableDate.getText().toString();
                 if(description.isEmpty()){
-                    Toast.makeText(getContext(), "Description box cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(location.isEmpty()){
-                    Toast.makeText(getContext(), "Location box cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Location cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(aboutMe.isEmpty()){
-                    Toast.makeText(getContext(), "AboutMe box cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "AboutMe cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(budget.isEmpty()){
-                    Toast.makeText(getContext(), "Budget box cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Budget cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
+                }
+                if(date.isEmpty()){
+                    Toast.makeText(getContext(), "Available date cannot be empty", Toast.LENGTH_SHORT).show();
                 }
                 if(photoFile == null || ivPostImage.getDrawable() == null){
                     Toast.makeText(getContext(), "Image box cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description,aboutMe, budget, location, currentUser, photoFile);
+                savePost(description,aboutMe, budget, location, date, currentUser, photoFile);
             }
         });
 
@@ -190,12 +196,13 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
         return file;
     }
 
-    private void savePost(String description,String aboutMe,String budget,String location, ParseUser currentUser, File photoFile) {
+    private void savePost(String description,String aboutMe,String budget,String location, String date, ParseUser currentUser, File photoFile) {
         ComposeActivity.Post post = new ComposeActivity.Post();
         post.setDescription(description);
         post.setLocation(location);
         post.setAboutMe(aboutMe);
         post.setBudget(budget);
+        post.setAvailableDate(date);
         post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {
@@ -210,9 +217,17 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
                 tvLocation.setText("");
                 etAboutMe.setText("");
                 etBudget.setText("");
+                availableDate.setText("");
                 ivPostImage.setImageResource(0);
+
+                goToPostsFragment();
             }
+
         });
+    }
+    public void goToPostsFragment(){
+        Intent i = new Intent(getContext(), ComposeActivity.class);
+        startActivity(i);
     }
     public void onPickPhoto(View view) {
         // Create intent for picking a photo from the gallery

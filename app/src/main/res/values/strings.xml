@@ -10,6 +10,7 @@
     <string name="AboutMe">About Me</string>
     <string name="Budget">Budget:</string>
     <string name="AvailableDate">Available Date:</string>
+    <string name="availableDate">Available Date</string>
     <string name="Date">date</string>
     <string name="AMD">Approximate Move Out Date:</string>
     <string name="Email">Email</string>

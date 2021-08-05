@@ -112,6 +112,7 @@
         android:id="@+id/minStay"
         android:layout_width="42dp"
         android:layout_height="32dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etBudget"
         app:srcCompat="@android:drawable/ic_menu_my_calendar" />
@@ -120,10 +121,23 @@
         android:id="@+id/tvMinStay"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="44dp"
         android:hint="Approximate Move Out Date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etBudget"
         tools:text="@string/AMD" />
+
+    <EditText
+        android:id="@+id/availableDate"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:fontFamily="@font/open_sans"
+        android:hint="@string/availableDate"
+        android:inputType="textPersonName"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etBudget" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
