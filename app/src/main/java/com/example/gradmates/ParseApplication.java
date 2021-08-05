@@ -1,5 +1,5 @@
 package com.example.gradmates;
-import com.example.gradmates.Post;
+import com.example.gradmates.Posts.ComposeActivity;
 import com.parse.Parse;
 import com.parse.ParseUser;
 
@@ -10,7 +10,7 @@ public class ParseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ParseUser.registerSubclass(Post.class);
+        ParseUser.registerSubclass(ComposeActivity.Post.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("omThNBQ0qrI17eYRjzsyYcM9ZLUcjpjHUyIHY91e")

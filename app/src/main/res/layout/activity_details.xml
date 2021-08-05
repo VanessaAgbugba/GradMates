@@ -18,7 +18,7 @@
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/profilePic"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name" />
+        tools:text="@string/Username" />
 
     <TextView
         android:id="@+id/tvLocation"
@@ -28,7 +28,7 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/profilePic"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername"
-        tools:text="location" />
+        tools:text="@string/Location" />
 
     <TextView
         android:id="@+id/tvAboutMe"
@@ -41,7 +41,7 @@
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePic"
-        tools:text="about me" />
+        tools:text="@string/AboutMe" />
 
     <TextView
         android:id="@+id/tvBudget"
@@ -80,7 +80,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="About Me"
+        android:text="@string/AboutMe"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Budget: "
+        android:text="@string/Budget"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +115,7 @@
         android:layout_marginStart="85dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Available Date: "
+        android:text="@string/AvailableDate"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/tvBudget"
@@ -131,33 +131,21 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAboutMe"
-        tools:text="date" />
+        tools:text="@string/Date" />
+
 
     <TextView
         android:id="@+id/tvMinStay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginEnd="196dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Min Stay: "
+        android:text="@string/AMD"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/open_sans_bold"
-        android:text="Max Stay: "
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <View
         android:id="@+id/divider2"

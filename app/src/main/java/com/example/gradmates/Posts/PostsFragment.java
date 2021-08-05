@@ -14,28 +14,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import com.example.gradmates.Post;
-import com.example.gradmates.Posts.PostsAdapter;
 import com.example.gradmates.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 //Fragment for FeedActivity
 public class PostsFragment extends Fragment {
     public static final String TAG = "PostsFragment";
     private RecyclerView rvPosts;
     private PostsAdapter adapter;
-    private List<Post> allPosts;
+    private List<ComposeActivity.Post> allPosts;
     private SwipeRefreshLayout swipeContainer;
 
     public PostsFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -48,7 +42,6 @@ public class PostsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_posts, container, false);
     }
 
@@ -64,7 +57,7 @@ public class PostsFragment extends Fragment {
             }
         });
 
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_green_light);
         rvPosts = view.findViewById(R.id.rvPosts);
         allPosts = new ArrayList<>();
         adapter = new PostsAdapter(getContext(), allPosts);
@@ -81,24 +74,24 @@ public class PostsFragment extends Fragment {
 
     private void queryPosts() {
         // specify what type of data we want to query - Post.class
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        ParseQuery<ComposeActivity.Post> query = ParseQuery.getQuery(ComposeActivity.Post.class);
         // include data referred by user key
-        query.include(Post.KEY_USER);
+        query.include(ComposeActivity.Post.KEY_USER);
         // limit query to latest 20 items
         query.setLimit(20);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
-        query.findInBackground(new FindCallback<Post>() {
+        query.findInBackground(new FindCallback<ComposeActivity.Post>() {
             @Override
-            public void done(List<Post> posts, ParseException e) {
+            public void done(List<ComposeActivity.Post> posts, ParseException e) {
                 // check for errors
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
 
-                for (Post post : posts) {
+                for (ComposeActivity.Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 
@@ -109,24 +102,24 @@ public class PostsFragment extends Fragment {
     }
     private void queryPostsNewest() {
         // specify what type of data we want to query - Post.class
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        ParseQuery<ComposeActivity.Post> query = ParseQuery.getQuery(ComposeActivity.Post.class);
         // include data referred by user key
-        query.include(Post.KEY_USER);
+        query.include(ComposeActivity.Post.KEY_USER);
         // limit query to latest 20 items
         query.setLimit(20);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
-        query.findInBackground(new FindCallback<Post>() {
+        query.findInBackground(new FindCallback<ComposeActivity.Post>() {
             @Override
-            public void done(List<Post> posts, ParseException e) {
+            public void done(List<ComposeActivity.Post> posts, ParseException e) {
                 // check for errors
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
 
-                for (Post post : posts) {
+                for (ComposeActivity.Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 
@@ -138,24 +131,24 @@ public class PostsFragment extends Fragment {
 
     private void queryPostsOldest() {
         // specify what type of data we want to query - Post.class
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        ParseQuery<ComposeActivity.Post> query = ParseQuery.getQuery(ComposeActivity.Post.class);
         // include data referred by user key
-        query.include(Post.KEY_USER);
+        query.include(ComposeActivity.Post.KEY_USER);
         // limit query to latest 20 items
         query.setLimit(20);
         // order posts by creation date (newest first)
         query.addAscendingOrder("createdAt");
         // start an asynchronous call for posts
-        query.findInBackground(new FindCallback<Post>() {
+        query.findInBackground(new FindCallback<ComposeActivity.Post>() {
             @Override
-            public void done(List<Post> posts, ParseException e) {
+            public void done(List<ComposeActivity.Post> posts, ParseException e) {
                 // check for errors
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
 
-                for (Post post : posts) {
+                for (ComposeActivity.Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 
@@ -164,7 +157,6 @@ public class PostsFragment extends Fragment {
             }
         });
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -228,5 +220,4 @@ public class PostsFragment extends Fragment {
             }
         });
     }
-
 }

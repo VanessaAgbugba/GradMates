@@ -10,15 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.gradmates.MapFragment;
 import com.example.gradmates.ParcelableObject;
-import com.example.gradmates.Post;
 import com.example.gradmates.R;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.codepath.asynchttpclient.AsyncHttpClient;
@@ -45,7 +40,6 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView timestamp;
     private ImageView profilePic;
     private TextView tvDate;
-    public Fragment fragment;
     JSONObject jsonObject;
     JSONArray jsonArrayResults;
     public Double longitude, latitude;
@@ -66,15 +60,12 @@ public class DetailsActivity extends AppCompatActivity {
         tvDate = findViewById(R.id.tvDate);
 
         ParcelableObject objectReceived = Parcels.unwrap(getIntent().getParcelableExtra("post"));
-        Post postReceived = objectReceived.getPost();
+        ComposeActivity.Post postReceived = objectReceived.getPost();
         Log.d("DetailsActivity", "User received = " + postReceived.getDescription());
 
         ParseUser postUser = postReceived.getUser();
 
         ParseFile image = postReceived.getImage();
-//        if (image != null) {
-//            Glide.with(this).load(image.getUrl()).into(ivImage);
-//        }
 
         if (tvDescription != null) {
             tvDescription.setText(postReceived.getDescription());
@@ -93,7 +84,7 @@ public class DetailsActivity extends AppCompatActivity {
                 // Access a JSON object response with `json.jsonObject`
                 Log.d("DEBUG OBJECT", json.jsonObject.toString());
                 jsonObject = json.jsonObject;
-                //result-> geometry-> location-> long/lat
+
                 try {
                     jsonArrayResults = (JSONArray) jsonObject.get("results");
                     Log.i("Results", String.valueOf(jsonArrayResults));
@@ -111,10 +102,7 @@ public class DetailsActivity extends AppCompatActivity {
                     Log.i("latitude", String.valueOf(latitude));
                     Log.i("longitude", String.valueOf(longitude));
 
-                    //Initialize fragment
                     Fragment fragment = new MapFragment(latitude, longitude);
-
-                    //Open fragment
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
 
                 } catch (JSONException e) {
@@ -148,6 +136,7 @@ public class DetailsActivity extends AppCompatActivity {
         if(tvDate != null) {
             tvDate.setText((String) postReceived.get("available_date"));
         }
+
         ParseFile profileImg = (ParseFile) postUser.get("profileImage");
         if(profilePic != null) {
             Glide.with(this).load(profileImg.getUrl()).circleCrop().into(profilePic);

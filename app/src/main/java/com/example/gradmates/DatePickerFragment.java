@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 
+//This class shows the current date once the calendar pops up
 public class DatePickerFragment extends DialogFragment {
 
     @NonNull

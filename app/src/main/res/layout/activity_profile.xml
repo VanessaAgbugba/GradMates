@@ -36,7 +36,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="USERNAME:"
+        android:text="@string/Username"
         android:textColor="@color/myPurple"
         app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintStart_toStartOf="parent" />
@@ -51,7 +51,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/tvEmail"
         app:layout_constraintStart_toEndOf="@+id/name"
-        tools:text="Username" />
+        tools:text="@string/Username" />
 
     <TextView
         android:id="@+id/email"
@@ -60,7 +60,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="EMAIL:"
+        android:text="@string/Email"
         android:textColor="@color/myPurple"
         app:layout_constraintBottom_toTopOf="@+id/age"
         app:layout_constraintStart_toStartOf="parent" />
@@ -75,7 +75,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/tvAge"
         app:layout_constraintStart_toEndOf="@+id/email"
-        tools:text="Email" />
+        tools:text="@string/Email" />
 
     <TextView
         android:id="@+id/age"
@@ -84,7 +84,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="AGE:"
+        android:text="@string/Age"
         android:textColor="@color/myPurple"
         app:layout_constraintBottom_toTopOf="@+id/gender"
         app:layout_constraintStart_toStartOf="parent" />
@@ -100,7 +100,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/tvGender"
         app:layout_constraintStart_toEndOf="@+id/age"
-        tools:text="Age" />
+        tools:text="@string/Age" />
 
     <TextView
         android:id="@+id/gender"
@@ -109,7 +109,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="GENDER:"
+        android:text="@string/Gender"
         android:textColor="@color/myPurple"
         app:layout_constraintBottom_toTopOf="@+id/pronouns"
         app:layout_constraintStart_toStartOf="parent" />
@@ -124,7 +124,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/tvPronouns"
         app:layout_constraintStart_toEndOf="@+id/gender"
-        tools:text="Gender" />
+        tools:text="@string/Gender" />
 
     <TextView
         android:id="@+id/pronouns"
@@ -133,7 +133,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="252dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="PRONOUNS:"
+        android:text="@string/Pronouns"
         android:textColor="@color/myPurple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -148,7 +148,7 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/pronouns"
-        tools:text="Pronouns" />
+        tools:text="@string/Pronouns" />
 
     <Button
         android:id="@+id/btnLogout"
@@ -159,7 +159,5 @@
         app:backgroundTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

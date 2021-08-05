@@ -24,12 +24,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gradmates.DatePickerFragment;
-import com.example.gradmates.Post;
 import com.example.gradmates.R;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -41,9 +41,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-//Fragment for NewPostActivity
+//Fragment for creating new posts
 public class ComposeFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
-    public static final String TAG = "NewPostActivity";
+    public static final String TAG = "ComposeFragment";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
     public static final int PICK_PHOTO_CODE = 1042;
     private Button btnTakePhoto;
@@ -56,12 +56,10 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
     private EditText etBudget;
     private File photoFile;
     public String photoFileName = "photo.jpg";
-    private Button minStay;
+    private ImageButton minStay;
     private TextView tvMinStay;
 
-    public ComposeFragment() {
-        // Required empty public constructor
-    }
+    public ComposeFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,6 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_compose, container, false);
     }
 
@@ -194,7 +191,7 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
     }
 
     private void savePost(String description,String aboutMe,String budget,String location, ParseUser currentUser, File photoFile) {
-        Post post = new Post();
+        ComposeActivity.Post post = new ComposeActivity.Post();
         post.setDescription(description);
         post.setLocation(location);
         post.setAboutMe(aboutMe);
@@ -213,7 +210,6 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
                 tvLocation.setText("");
                 etAboutMe.setText("");
                 etBudget.setText("");
-
                 ivPostImage.setImageResource(0);
             }
         });

@@ -17,7 +17,7 @@
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Name" />
+        tools:text="@string/Username" />
 
     <ImageView
         android:id="@+id/ivImage"
@@ -40,7 +40,7 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivImage"
-        tools:text="description" />
+        tools:text="@string/description" />
 
     <TextView
         android:id="@+id/tvLocation"
@@ -52,19 +52,19 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
         app:layout_constraintTop_toBottomOf="@+id/tvUsername"
-        tools:text="location" />
+        tools:text="@string/Location" />
 
     <TextView
         android:id="@+id/timeStamp"
-        android:layout_width="70dp"
-        android:layout_height="19dp"
+        android:layout_width="74dp"
+        android:layout_height="17dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/open_sans"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-        tools:text="timestamp" />
+        tools:text="@string/TimeStamp" />
 
     <ImageView
         android:id="@+id/ivProfileImage"

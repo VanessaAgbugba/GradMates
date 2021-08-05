@@ -3,5 +3,29 @@
     <string name="google_maps_api_key">AIzaSyCmMy40SbmX4ZDHWGyLlhUD_OPLYepw0Jg</string>
     <string name="Login">Log in</string>
     <string name="Signup">Sign up</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="ForgotPassword">Forgot Password?</string>
+    <string name="Location">location</string>
+    <string name="AboutMe">About Me</string>
+    <string name="Budget">Budget:</string>
+    <string name="AvailableDate">Available Date:</string>
+    <string name="Date">date</string>
+    <string name="AMD">Approximate Move Out Date:</string>
+    <string name="Email">Email</string>
+    <string name="Age">Age</string>
+    <string name="Gender">Gender</string>
+    <string name="Pronouns">Pronouns</string>
+    <string name="Post">Post</string>
+    <string name="Description">What are you looking for?</string>
+    <string name="description">Description</string>
+    <string name="About">Tell us about yourself</string>
+    <string name="BudgetRent">Budget or Rent</string>
+    <string name="TakePhoto">Take Photo</string>
+    <string name="UploadPhoto">Upload Photo</string>
+    <string name="TimeStamp">Timestamp</string>
+
+
+
 
 </resources>

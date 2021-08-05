@@ -48,6 +48,7 @@ import permissions.dispatcher.RuntimePermissions;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
+//This is the Map fragment
 @RuntimePermissions
 public class MapFragment extends Fragment {
 
@@ -56,12 +57,11 @@ public class MapFragment extends Fragment {
     private LocationRequest mLocationRequest;
     Location mCurrentLocation;
     Location postUserLocation;
-    private long UPDATE_INTERVAL = 60000;  /* 60 secs */
-    private long FASTEST_INTERVAL = 5000; /* 5 secs */
+    private long UPDATE_INTERVAL = 60000;
+    private long FASTEST_INTERVAL = 5000;
     private double lat, lng;
     private final static String KEY_LOCATION = "location";
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-
 
     public MapFragment(double lat, double lng) {
             this.lat = lat;
@@ -117,7 +117,6 @@ public class MapFragment extends Fragment {
         map = googleMap;
         if (map != null) {
             // Map is ready
-            Toast.makeText(getContext(), "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
             MapFragmentPermissionsDispatcher.getMyLocationWithPermissionCheck(this);
             MapFragmentPermissionsDispatcher.startLocationUpdatesWithPermissionCheck(this);
          } else {
@@ -192,12 +191,9 @@ public class MapFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         displayUniqueLocation();
-
         MapFragmentPermissionsDispatcher.startLocationUpdatesWithPermissionCheck(this);
     }
-
 
     private  void displayUniqueLocation() {
 
@@ -207,7 +203,6 @@ public class MapFragment extends Fragment {
             map.moveCamera(CameraUpdateFactory.newLatLng(location));
             map.animateCamera(CameraUpdateFactory.zoomBy(10.0f));
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(location, 17);
-
         }
     }
 
