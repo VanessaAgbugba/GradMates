@@ -254,7 +254,6 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
         startActivity(i);
     }
 
-
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar calendar = Calendar.getInstance();

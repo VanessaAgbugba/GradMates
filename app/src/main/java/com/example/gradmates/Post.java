@@ -78,12 +78,11 @@ public class Post extends ParseObject {
 
     public ParseUser getUser() {
         ParseUser user = getParseUser(KEY_USER);
-        //user = ParseUser.getCurrentUser();
-//        try {
-//            user.fetchIfNeeded();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            user.fetchIfNeeded();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return user;
     }
     public void setUser(ParseUser user) {
