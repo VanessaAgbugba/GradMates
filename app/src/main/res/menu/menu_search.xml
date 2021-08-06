@@ -8,7 +8,9 @@
         android:title="Search"
         app:actionViewClass="android.widget.SearchView" />
 
-    <item android:id="@+id/newest"
+    <item
+        android:id="@+id/newest"
+        android:icon="@drawable/direct"
         android:title="Newest" />
     <item android:id="@+id/oldest"
         android:title="Oldest" />

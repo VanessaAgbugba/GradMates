@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,7 +31,7 @@ public class ProfileFragment extends Fragment {
     private TextView tvPronouns;
     private TextView tvEmail;
     private TextView tvLocation;
-    private Button btnLogout;
+    private ImageButton btnLogout;
     public ProfileFragment() {
     }
 

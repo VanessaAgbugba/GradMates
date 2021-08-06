@@ -8,14 +8,14 @@ import org.parceler.Parcel;
 @Parcel
 public class ParcelableObject {
 
-    ComposeActivity.Post post;
+    Post post;
 
     public ParcelableObject(){}
 
-    public void setPost(ComposeActivity.Post post){
+    public void setPost(Post post){
         this.post = post;
     }
-    public ComposeActivity.Post getPost(){
+    public Post getPost(){
         return post;
     }
 }

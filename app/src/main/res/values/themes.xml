@@ -5,7 +5,11 @@
         <item name="colorPrimary">@color/myPurple</item>
         <item name="colorPrimaryDark">@color/myPurple</item>
         <item name="colorAccent">@color/myPurple</item>
+        <item name="android:actionOverflowButtonStyle">@style/MyTheme</item>
 
+    </style>
+    <style name="MyTheme" parent="android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_baseline_sort_24</item>
     </style>
 
 

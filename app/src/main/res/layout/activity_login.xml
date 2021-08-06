@@ -30,7 +30,8 @@
         android:onClick="loginUser"
         android:text="Log in"
         android:textAllCaps="false"
-        app:backgroundTint="@color/myPurple"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
@@ -69,7 +70,7 @@
         android:layout_marginEnd="28dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="@string/ForgotPassword"
-        android:textColor="@color/myPurple"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

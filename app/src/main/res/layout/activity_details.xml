@@ -47,23 +47,14 @@
         android:id="@+id/tvBudget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="50dp"
-        android:fontFamily="@font/open_sans_semibold"
+        android:fontFamily="@font/open_sans"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAboutMe"
         tools:text="budget" />
 
-    <FrameLayout
-        android:id="@+id/fragment_container_view"
-        android:name="com.example.gradmates.MapFragment"
-        android:layout_width="410dp"
-        android:layout_height="363dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    </FrameLayout>
 
     <ImageView
         android:id="@+id/profilePic"
@@ -112,7 +103,7 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
+        android:layout_marginStart= "50dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="@string/AvailableDate"
@@ -121,31 +112,31 @@
         app:layout_constraintStart_toEndOf="@+id/tvBudget"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
+
     <TextView
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/open_sans_semibold"
+        android:layout_marginStart="304dp"
+        android:layout_marginTop="49dp"
+        android:fontFamily="@font/open_sans"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAboutMe"
         tools:text="@string/Date" />
 
-
     <TextView
         android:id="@+id/tvMinStay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="196dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="@string/AMD"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <View
         android:id="@+id/divider2"
@@ -156,5 +147,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/black"
+        android:text="March 20, 2022"
+        app:layout_constraintStart_toEndOf="@+id/tvMinStay"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container_view"
+        android:name="com.example.gradmates.MapFragment"
+        android:layout_width="418dp"
+        android:layout_height="430dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

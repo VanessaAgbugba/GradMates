@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gradmates.DatePickerFragment;
+import com.example.gradmates.Post;
 import com.example.gradmates.R;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -195,9 +196,32 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
         File file = new File(mediaStorageDir.getPath() + File.separator + photoFileName);
         return file;
     }
+    public void onPickPhoto(View view) {
+        // Create intent for picking a photo from the gallery
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(intent, PICK_PHOTO_CODE);
+    }
+    public Bitmap loadFromUri(Uri photoUri) {
+        Bitmap image = null;
+        try {
+            // check version of Android on device
+            if(Build.VERSION.SDK_INT > 27){
+                // on newer versions of Android, use the new decodeBitmap method
+                ImageDecoder.Source source = ImageDecoder.createSource(this.getContext().getContentResolver(), photoUri);
+                image = ImageDecoder.decodeBitmap(source);
+            } else {
+                // support older versions of Android by using getBitmap
+                image = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), photoUri);
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "Error loading image", e);
+        }
+        return image;
+    }
 
     private void savePost(String description,String aboutMe,String budget,String location, String date, ParseUser currentUser, File photoFile) {
-        ComposeActivity.Post post = new ComposeActivity.Post();
+        Post post = new Post();
         post.setDescription(description);
         post.setLocation(location);
         post.setAboutMe(aboutMe);
@@ -229,29 +253,7 @@ public class ComposeFragment extends Fragment implements DatePickerDialog.OnDate
         Intent i = new Intent(getContext(), ComposeActivity.class);
         startActivity(i);
     }
-    public void onPickPhoto(View view) {
-        // Create intent for picking a photo from the gallery
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-            startActivityForResult(intent, PICK_PHOTO_CODE);
-    }
-    public Bitmap loadFromUri(Uri photoUri) {
-        Bitmap image = null;
-        try {
-            // check version of Android on device
-            if(Build.VERSION.SDK_INT > 27){
-                // on newer versions of Android, use the new decodeBitmap method
-                ImageDecoder.Source source = ImageDecoder.createSource(this.getContext().getContentResolver(), photoUri);
-                image = ImageDecoder.decodeBitmap(source);
-            } else {
-                // support older versions of Android by using getBitmap
-                image = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(), photoUri);
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "Error loading image", e);
-        }
-        return image;
-    }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

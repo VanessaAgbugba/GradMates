@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +21,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText etNewUser;
     EditText etEmail;
     EditText etNewPassword;
+    Button goToSignIn;
     Button btnSignUp2;
 
     @Override
@@ -30,6 +32,13 @@ public class SignupActivity extends AppCompatActivity {
         etNewUser = findViewById(R.id.etNewUser);
         etEmail = findViewById(R.id.etEmail);
         etNewPassword = findViewById(R.id.etNewPassword);
+        goToSignIn = findViewById(R.id.goToSignIn);
+        goToSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLoginActivity();
+            }
+        });
         btnSignUp2 = findViewById(R.id.btnSignUp2);
         btnSignUp2.setOnClickListener(new View.OnClickListener() {
             @Override

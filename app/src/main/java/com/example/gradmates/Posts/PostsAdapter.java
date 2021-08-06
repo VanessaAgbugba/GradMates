@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.gradmates.ParcelableObject;
+import com.example.gradmates.Post;
 import com.example.gradmates.R;
 import com.parse.ParseFile;
 
@@ -33,9 +34,8 @@ import java.util.List;
 //This is the adapter.
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> implements Filterable {
     private Context context;
-    private List<ComposeActivity.Post> posts;
-    private List<ComposeActivity.Post> postsToDisplay;
-    private ComposeActivity.Post post = new ComposeActivity.Post();
+    private List<Post> posts;
+    private List<Post> postsToDisplay;
 
     @NonNull
     @Override
@@ -46,11 +46,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ComposeActivity.Post post = postsToDisplay.get(position);
+        Post post = postsToDisplay.get(position);
         holder.bind(post);
     }
 
-    public PostsAdapter(Context context, List<ComposeActivity.Post> posts) {
+    public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
         this.posts = posts;
         postsToDisplay = new ArrayList<>(posts);
@@ -83,7 +83,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             profilePic = itemView.findViewById(R.id.ivProfileImage);
         }
 
-        public void bind(ComposeActivity.Post post) {
+        public void bind(Post post) {
             postContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -153,18 +153,18 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         notifyItemRangeRemoved(0, size);
     }
     public void sortByBudgetAscending(){
-        Collections.sort(postsToDisplay, new Comparator<ComposeActivity.Post>() {
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
             @Override
-            public int compare(ComposeActivity.Post o1, ComposeActivity.Post o2) {
+            public int compare(Post o1, Post o2) {
                 return o1.getBudget().compareTo(o2.getBudget());
             }
         });
         notifyDataSetChanged();
     }
     public void sortByBudgetDescending(){
-        Collections.sort(postsToDisplay, new Comparator<ComposeActivity.Post>() {
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
             @Override
-            public int compare(ComposeActivity.Post o1, ComposeActivity.Post o2) {
+            public int compare(Post o1, Post o2) {
                 return o2.getBudget().compareTo(o1.getBudget());
             }
         });
@@ -172,9 +172,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
     public void sortByDateEarliest() throws ParseException {
 
-        Collections.sort(postsToDisplay, new Comparator<ComposeActivity.Post>() {
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
             @Override
-            public int compare(ComposeActivity.Post o1, ComposeActivity.Post o2) {
+            public int compare(Post o1, Post o2) {
                 try {
                     return o1.getDateObject().compareTo(o2.getDateObject());
                 } catch (ParseException e) {
@@ -188,9 +188,9 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
     public void sortByDateLatest(){
 
-        Collections.sort(postsToDisplay, new Comparator<ComposeActivity.Post>() {
+        Collections.sort(postsToDisplay, new Comparator<Post>() {
             @Override
-            public int compare(ComposeActivity.Post o1, ComposeActivity.Post o2) {
+            public int compare(Post o1, Post o2) {
                 try {
                     return o2.getDateObject().compareTo(o1.getDateObject());
                 } catch (ParseException e) {
@@ -202,7 +202,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public void addAll(List<ComposeActivity.Post> list) {
+    public void addAll(List<Post> list) {
         posts.addAll(list);
         postsToDisplay.addAll(list);
         notifyDataSetChanged();
@@ -212,7 +212,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            List<ComposeActivity.Post> filteredList = new ArrayList<>();
+            List<Post> filteredList = new ArrayList<>();
             if(constraint == null || constraint.length() == 0){
                 //If the user does not enter anything, display the whole list
                 filteredList.addAll(posts);
@@ -223,7 +223,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 //iterate to see which post matched filterPattern
-                for(ComposeActivity.Post post: posts){
+                for(Post post: posts){
                     if(post.getLocation().toLowerCase().contains(filterPattern)) {
                         filteredList.add(post);
                     }

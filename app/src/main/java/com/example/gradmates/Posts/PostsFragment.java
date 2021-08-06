@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import com.example.gradmates.Post;
 import com.example.gradmates.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -26,7 +27,7 @@ public class PostsFragment extends Fragment {
     public static final String TAG = "PostsFragment";
     private RecyclerView rvPosts;
     private PostsAdapter adapter;
-    private List<ComposeActivity.Post> allPosts;
+    private List<Post> allPosts;
     private SwipeRefreshLayout swipeContainer;
 
     public PostsFragment() {
@@ -74,24 +75,24 @@ public class PostsFragment extends Fragment {
 
     private void queryPosts() {
         // specify what type of data we want to query - Post.class
-        ParseQuery<ComposeActivity.Post> query = ParseQuery.getQuery(ComposeActivity.Post.class);
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // include data referred by user key
-        query.include(ComposeActivity.Post.KEY_USER);
+        query.include(Post.KEY_USER);
         // limit query to latest 20 items
         query.setLimit(20);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
-        query.findInBackground(new FindCallback<ComposeActivity.Post>() {
+        query.findInBackground(new FindCallback<Post>() {
             @Override
-            public void done(List<ComposeActivity.Post> posts, ParseException e) {
+            public void done(List<Post> posts, ParseException e) {
                 // check for errors
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
 
-                for (ComposeActivity.Post post : posts) {
+                for (Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 
@@ -102,24 +103,24 @@ public class PostsFragment extends Fragment {
     }
     private void queryPostsNewest() {
         // specify what type of data we want to query - Post.class
-        ParseQuery<ComposeActivity.Post> query = ParseQuery.getQuery(ComposeActivity.Post.class);
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // include data referred by user key
-        query.include(ComposeActivity.Post.KEY_USER);
+        query.include(Post.KEY_USER);
         // limit query to latest 20 items
         query.setLimit(20);
         // order posts by creation date (newest first)
         query.addDescendingOrder("createdAt");
         // start an asynchronous call for posts
-        query.findInBackground(new FindCallback<ComposeActivity.Post>() {
+        query.findInBackground(new FindCallback<Post>() {
             @Override
-            public void done(List<ComposeActivity.Post> posts, ParseException e) {
+            public void done(List<Post> posts, ParseException e) {
                 // check for errors
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
 
-                for (ComposeActivity.Post post : posts) {
+                for (Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 
@@ -131,24 +132,24 @@ public class PostsFragment extends Fragment {
 
     private void queryPostsOldest() {
         // specify what type of data we want to query - Post.class
-        ParseQuery<ComposeActivity.Post> query = ParseQuery.getQuery(ComposeActivity.Post.class);
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // include data referred by user key
-        query.include(ComposeActivity.Post.KEY_USER);
+        query.include(Post.KEY_USER);
         // limit query to latest 20 items
         query.setLimit(20);
         // order posts by creation date (newest first)
         query.addAscendingOrder("createdAt");
         // start an asynchronous call for posts
-        query.findInBackground(new FindCallback<ComposeActivity.Post>() {
+        query.findInBackground(new FindCallback<Post>() {
             @Override
-            public void done(List<ComposeActivity.Post> posts, ParseException e) {
+            public void done(List<Post> posts, ParseException e) {
                 // check for errors
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
 
-                for (ComposeActivity.Post post : posts) {
+                for (Post post : posts) {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 

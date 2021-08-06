@@ -1,7 +1,9 @@
 package com.example.gradmates.Posts;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.gradmates.MapFragment;
 import com.example.gradmates.ParcelableObject;
+import com.example.gradmates.Post;
 import com.example.gradmates.R;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -23,12 +26,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcels;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import okhttp3.Headers;
 
 //This is the activity that expands the details of a post
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     public static final String TAG = "DetailsActivity";
     private TextView tvUsername;
@@ -40,6 +45,7 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView timestamp;
     private ImageView profilePic;
     private TextView tvDate;
+    private TextView date;
     JSONObject jsonObject;
     JSONArray jsonArrayResults;
     public Double longitude, latitude;
@@ -58,9 +64,10 @@ public class DetailsActivity extends AppCompatActivity {
         timestamp = findViewById(R.id.timeStamp);
         profilePic = findViewById(R.id.profilePic);
         tvDate = findViewById(R.id.tvDate);
+        date = findViewById(R.id.date);
 
         ParcelableObject objectReceived = Parcels.unwrap(getIntent().getParcelableExtra("post"));
-        ComposeActivity.Post postReceived = objectReceived.getPost();
+        Post postReceived = objectReceived.getPost();
         Log.d("DetailsActivity", "User received = " + postReceived.getDescription());
 
         ParseUser postUser = postReceived.getUser();
@@ -75,6 +82,7 @@ public class DetailsActivity extends AppCompatActivity {
             tvLocation.setText(postReceived.getLocation());
         }
         AsyncHttpClient client = new AsyncHttpClient();
+
 
         //Using geocode to get the longitude and latitude of the location
         //Used asyncHttpClient to send a geocode JSON request to retrieve the location
@@ -176,6 +184,16 @@ public class DetailsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return "";
+    }
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+        String currentDateString = DateFormat.getDateInstance().format(calendar.getTime());
+        date.setText(currentDateString);
     }
 }
 
