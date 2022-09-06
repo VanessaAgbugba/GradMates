@@ -1,40 +1,40 @@
-# MySimpleToDo
+# GRADMATES
 
-# Project 1 - *To Do List App*
+**Social Media App** is an android app that allows users, especially college graduates who are looking for apartments or room mates to find each other.
 
-**The To Do List App** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
 
-Submitted by: **Vanessa Agbugba**
+Designed and Developed by: **Vanessa Agbugba**
 
-Time spent: **5** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-* [x] User can **view a list of todo items**
-* [x] User can **successfully add and remove items** from the todo list
-* [x] User's **list of items are persisted** across app restarts
+* [x] User can sign up to create a new account using Parse authentication
+* [x] User can log in to their account
+* [x] User can log out of their account
+* [x] User can take a photo, upload a photo, add a caption, and post it to the feed
+* [x] User can view the all posts on the feed
+* [x] User can pull to refresh
+* [x] User can tap a post to go to a Post Details activity, which includes budget/rent, available move in date and approximate move out date caption and a google map showing the location of their apartment, streets and places around it.
+* [x] User can search posts by username or location
+* [x] User can sort the posts by Oldest, Lowest budget, Highest budget, Earliest available date and Latest available date
 
-The following **bonus** features are implemented:
 
-* [ ] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected back in the todo list
+I plan to implement the following features in the future:
 
-The following **additional** features are implemented:
+* [ ] User can like and comment
+* [ ] User can send texts to fellow app users
 
-* [ ] List anything else that you can get done to improve the app functionality!
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='./myTodoApp.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://vimeo.com/747053324' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [Kap](https://getkap.co/).
 
-## Notes
-
-Describe any challenges encountered while building the app.
 
 ## License
 
