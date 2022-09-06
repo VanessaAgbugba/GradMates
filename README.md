@@ -8,7 +8,7 @@ Designed and Developed by: **Vanessa Agbugba**
 
 ## User Stories
 
-The following **required** functionality is completed:
+The following functionality is completed:
 
 * [x] User can sign up to create a new account using Parse authentication
 * [x] User can log in to their account
