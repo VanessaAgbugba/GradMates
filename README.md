@@ -1,6 +1,6 @@
 # GRADMATES
 
-**Social Media App** is an android app that allows users, especially college graduates who are looking for apartments or room mates to find each other.
+**The Gradmates App** is an android app that allows users, especially college graduates who are looking for apartments or room mates to find each other.
 
 
 Designed and Developed by: **Vanessa Agbugba**
